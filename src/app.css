@@ -1,3 +1,76 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	* {
+		margin: 0;
+	}
+
+	body {
+		-webkit-font-smoothing: antialiased;
+		isolation: isolate;
+	}
+
+	img,
+	picture,
+	video,
+	canvas,
+	svg {
+		display: block;
+		max-width: 100%;
+	}
+
+	input,
+	button,
+	textarea,
+	select {
+		font: inherit;
+	}
+
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		overflow-wrap: break-word;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		text-wrap: balance;
+	}
+	p {
+		text-wrap: pretty;
+	}
+
+	:root {
+		--container-padding: clamp(1rem, 5vw, 3rem);
+	}
+
+	/* Light theme */
+	:root {
+		color-scheme: light;
+	}
+
+	/* Dark theme */
+	[data-theme='dark'] {
+		color-scheme: dark;
+	}
+
+	html {
+		@apply transition-colors;
+	}
+}

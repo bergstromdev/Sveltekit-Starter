@@ -2,14 +2,13 @@
 	import '@fontsource-variable/rubik';
 	import '../app.css';
 	import { onNavigate } from '$app/navigation';
+	import Header from '$lib/Header.svelte';
 
 	let { children } = $props();
 
 	// Use view transitions api for page transitions
 	onNavigate(async () => {
-		// @ts-ignore
 		if (!document.startViewTransition) return;
-
 		return new Promise((oldStateCaptureResolve) => {
 			// @ts-ignore
 			document.startViewTransition(async () => {
@@ -21,4 +20,5 @@
 	});
 </script>
 
-{@render children()}
+<Header />
+<main class="container">{@render children()}</main>
