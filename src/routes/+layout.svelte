@@ -10,12 +10,12 @@
 	onNavigate(async () => {
 		if (!document.startViewTransition) return;
 		return new Promise((oldStateCaptureResolve) => {
-			// @ts-ignore
-			document.startViewTransition(async () => {
-				oldStateCaptureResolve();
-				// @ts-ignore
-				await navigation.complete;
-			});
+			document.startViewTransition &&
+				document.startViewTransition(async () => {
+					oldStateCaptureResolve();
+					// @ts-ignore
+					await navigation.complete;
+				});
 		});
 	});
 </script>
