@@ -1,53 +1,62 @@
-<button on:click={window.toggleTheme}>
-	<span class="sr-only">Toggle theme</span>
-	<svg xmlns="http://www.w3.org/2000/svg" class="w-6" viewBox="0 0 32 32" fill="currentColor">
-		<clipPath id="theme-toggle-clip-path">
-			<path d="M0 0h32v32h-32ZM6 16A1 1 0 0026 16 1 1 0 006 16"></path>
+<button type="button" aria-label="Toggle theme" on:click={window.toggleTheme}>
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		aria-hidden="true"
+		fill="currentColor"
+		stroke-linecap="round"
+		class="w-8 h-8"
+		viewBox="0 0 32 32"
+	>
+		<clipPath id="theme-toggle__cutout">
+			<path d="M0-5h30a1 1 0 0 0 9 13v24H0Z" />
 		</clipPath>
-		<g clip-path="url(#theme-toggle-clip-path)">
-			<path
-				d="M30.7 21.3 27.1 16l3.7-5.3c.4-.5.1-1.3-.6-1.4l-6.3-1.1-1.1-6.3c-.1-.6-.8-.9-1.4-.6L16 5l-5.4-3.7c-.5-.4-1.3-.1-1.4.6l-1 6.3-6.4 1.1c-.6.1-.9.9-.6 1.3L4.9 16l-3.7 5.3c-.4.5-.1 1.3.6 1.4l6.3 1.1 1.1 6.3c.1.6.8.9 1.4.6l5.3-3.7 5.3 3.7c.5.4 1.3.1 1.4-.6l1.1-6.3 6.3-1.1c.8-.1 1.1-.8.7-1.4zM16 25.1c-5.1 0-9.1-4.1-9.1-9.1 0-5.1 4.1-9.1 9.1-9.1s9.1 4.1 9.1 9.1c0 5.1-4 9.1-9.1 9.1z"
-			></path>
+		<g clip-path="url(#theme-toggle__cutout)">
+			<circle cx="16" cy="16" r="9.34" />
+			<g stroke="currentColor" stroke-width="1.5">
+				<path d="M16 5.5v-4" />
+				<path d="M16 30.5v-4" />
+				<path d="M1.5 16h4" />
+				<path d="M26.5 16h4" />
+				<path d="m23.4 8.6 2.8-2.8" />
+				<path d="m5.7 26.3 2.9-2.9" />
+				<path d="m5.8 5.8 2.8 2.8" />
+				<path d="m23.4 23.4 2.9 2.9" />
+			</g>
 		</g>
-		<path
-			class="circle"
-			d="M16 7.7c-4.6 0-8.2 3.7-8.2 8.2s3.6 8.4 8.2 8.4 8.2-3.7 8.2-8.2-3.6-8.4-8.2-8.4zm0 14.4c-3.4 0-6.1-2.9-6.1-6.2s2.7-6.1 6.1-6.1c3.4 0 6.1 2.9 6.1 6.2s-2.7 6.1-6.1 6.1z"
-		></path>
-		<path
-			class="inner"
-			d="M16 9.5c-3.6 0-6.4 2.9-6.4 6.4s2.8 6.5 6.4 6.5 6.4-2.9 6.4-6.4-2.8-6.5-6.4-6.5z"
-		></path>
 	</svg>
 </button>
 
-<style>
-	button {
-		--duration: 1000ms;
+<style lang="postcss">
+	svg {
+		--duration: 500ms;
 	}
-
-	button svg * {
+	svg path {
+		transition-timing-function: cubic-bezier(0.5, 1.75, 0.75, 1.25);
 		transform-origin: center;
-		transition:
-			transform calc(var(--duration)) cubic-bezier(0, 0, 0, 1.25),
-			color calc(var(--duration)) cubic-bezier(0, 0, 0, 1.25);
+		transition-duration: calc(var(--duration) * 0.8);
+	}
+	svg g path {
+		transition-property: opacity, transform;
+		transition-delay: calc(var(--duration) * 0.2);
+	}
+	svg:first-child path {
+		transition-property: transform, d;
 	}
 
 	:global([data-theme='dark']) svg {
-		.circle {
-			transform: scale(1.5);
-		}
-
-		.inner {
-			transform: translate3d(3px, -3px, 0) scale(1.2);
-		}
-
 		g path {
-			transform: scale(0.65);
+			transform: scale(0.5) rotate(45deg);
+			opacity: 0;
+			transition-delay: 0s;
+		}
+		&:first-child path {
+			d: path('M-12 5h30a1 1 0 0 0 9 13v24h-39Z');
+			transition-delay: calc(var(--duration) * 0.2);
 		}
 	}
 
 	@media (prefers-reduced-motion) {
-		button {
+		svg {
 			--duration: 5000ms;
 		}
 	}
