@@ -7,13 +7,13 @@
 	let { children } = $props();
 
 	// Use view transitions api for page transitions
-	onNavigate(async () => {
+	onNavigate(async (navigation) => {
 		if (!document.startViewTransition) return;
+
 		return new Promise((oldStateCaptureResolve) => {
 			document.startViewTransition &&
 				document.startViewTransition(async () => {
 					oldStateCaptureResolve();
-					// @ts-ignore
 					await navigation.complete;
 				});
 		});
