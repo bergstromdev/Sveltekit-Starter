@@ -25,5 +25,6 @@ export default {
 			{ dark: { ...themes.dark, ...themeOverrides, 'base-100': 'hsl(222, 20%, 5%)' } }
 		]
 	},
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	plugins: [require('daisyui')]
 };
