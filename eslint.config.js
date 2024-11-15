@@ -28,6 +28,29 @@ export default ts.config(
 		}
 	},
 	{
+		rules: {
+			'@typescript-eslint/no-explicit-any': 0,
+			'@typescript-eslint/no-unused-expressions': 0,
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{
+					args: 'all',
+					argsIgnorePattern: '^_',
+					caughtErrors: 'all',
+					caughtErrorsIgnorePattern: '^_',
+					destructuredArrayIgnorePattern: '^_',
+					varsIgnorePattern: '^_',
+					ignoreRestSiblings: true
+				}
+			],
+			'@typescript-eslint/ban-ts-comment': 'off',
+			'no-undef': 'off',
+			'no-constant-condition': 'off',
+			'svelte/no-at-html-tags': 'off',
+			'svelte/no-unused-svelte-ignore': 'off'
+		}
+	},
+	{
 		ignores: ['build/', '.svelte-kit/', 'dist/']
 	}
 );
