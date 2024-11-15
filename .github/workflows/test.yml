@@ -17,7 +17,13 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      - run: npm ci
-      - run: npm run check
-      - run: npm run lint
-      - run: npm run test
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Svelte Checks
+        run: npm run check
+      - name: Run Lint
+        run: npm run lint
+      - name: Run Tests
+        run: npm run test
