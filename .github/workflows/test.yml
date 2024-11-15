@@ -18,6 +18,6 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
-      - run: npm check
-      - run: npm lint
-      - run: npm test
+      - run: npm run check
+      - run: npm run lint
+      - run: npm run test
